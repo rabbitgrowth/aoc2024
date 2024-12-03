@@ -2,7 +2,7 @@ program←⊃⎕NGET'03.txt'
 
 Split←↑,⍥⊂↓
 SplitNum←{⍵Split⍨+/∧\⎕D∊⍨3↑⍵}
-Prod←{
+Product←{
   x rest←SplitNum ⍵
   ''≡x:0
   sep rest←1 Split rest
@@ -15,10 +15,10 @@ Prod←{
 }
 
 starts←'mul('(≢⍤⊣+⍸⍤⍷)program
-prods←(starts-1)Prod⍤↓¨⊂program
+products←(starts-1)Product⍤↓¨⊂program
 do dont←'do()' 'don''t()'⍸⍤⍷¨⊂program
 intervals←{⍵[⍋⍵]}do,dont
 mask←(1,intervals∊do)[1+intervals⍸starts]
 
-⎕←+/prods
-⎕←+/mask/prods
+⎕←+/products
+⎕←+/mask/products
