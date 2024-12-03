@@ -19,7 +19,7 @@ prods←Prod¨↓∘program¨starts-1
 do  ←⍸'do()'    ⍷program
 dont←⍸'don''t()'⍷program
 intervals←{⍵[⍋⍵]}do,dont
-mask←~(intervals⍸starts)∊⍸intervals∊dont
+mask←(1,intervals∊do)[1+intervals⍸starts]
 
 ⎕←+/prods
 ⎕←+/mask/prods
