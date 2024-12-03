@@ -14,8 +14,8 @@ Prod←{
   x×⍥⍎y
 }
 
-starts←4+⍸'mul('⍷program
-prods←Prod¨↓∘program¨starts-1
+starts←'mul('(≢⍤⊣+⍸⍤⍷)program
+prods←(starts-1)Prod⍤↓¨⊂program
 do dont←'do()' 'don''t()'⍸⍤⍷¨⊂program
 intervals←{⍵[⍋⍵]}do,dont
 mask←(1,intervals∊do)[1+intervals⍸starts]
