@@ -1,5 +1,4 @@
 import re
-from math import prod
 
 with open('03.txt') as f:
     program = f.read()
