@@ -1,13 +1,5 @@
 puzzle←↑⊃⎕NGET'04.txt'1
-Diagonal←{⍺⍺⍉↑(' '⍴¨⍨⍵⍵¯1+⍳≢⍵),¨↓⍵}
-E←⊢
-W←⌽
-S←⍉
-N←⌽⍉
-SW←⊢Diagonal⊢
-SE←⊢Diagonal⌽
-NE←⌽Diagonal⊢
-NW←⌽Diagonal⌽
-Directions←(E⍪W),⍥⊂S⍪N⍪SW⍪SE⍪NE⍪NW
+X←{⍺⍺⍉↑(' '⍴¨⍨⍵⍵¯1+⍳≢⍵),¨↓⍵} ⍝ diagonal
+Directions←{⍵(⌽⍵)(⍉⍵)(⌽⍉⍵)(⊢X⊢⍵)(⊢X⌽⍵)(⌽X⊢⍵)(⌽X⌽⍵)}
 ⎕←+/∊'XMAS'∘⍷¨Directions puzzle
 ⎕←+/∊{∧/∨⌿'MAS'∘.≡∘(1 1∘⍉¨)⍥(⊢,⍥⊂⌽)⍵}⌺3 3⊢puzzle
