@@ -38,10 +38,10 @@ print(len(set((x, y) for x, y, dx, dy in patrol(obstacles))))
 
 def causes_loop(extra_obstacle):
     seen = set()
-    for situation in patrol(obstacles | {extra_obstacle}):
-        if situation in seen:
+    for state in patrol(obstacles | {extra_obstacle}):
+        if state in seen:
             return True
-        seen.add(situation)
+        seen.add(state)
     return False
 
 print(sum(map(causes_loop, spaces)))
