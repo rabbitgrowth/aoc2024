@@ -28,16 +28,12 @@ def patrol(obstacles):
     dx, dy = 0, -1
     while True:
         yield x, y, dx, dy
-        new_x = x + dx
-        new_y = y + dy
-        if not inside(new_x, new_y):
-            return
-        if (new_x, new_y) in obstacles:
+        while (x + dx, y + dy) in obstacles:
             dx, dy = rotate(dx, dy)
-            x += dx
-            y += dy
-        else:
-            x, y = new_x, new_y
+        x += dx
+        y += dy
+        if not inside(x, y):
+            return
 
 print(len(set((x, y) for x, y, dx, dy in patrol(obstacles))))
 
