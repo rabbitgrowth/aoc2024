@@ -17,28 +17,25 @@ for y, line in enumerate(lines):
         elif char == '#':
             obstacles.append((x, y))
         elif char == '^':
-            guard = x, y
-
-x, y = guard
-dx, dy = 0, -1
+            start_x, start_y = x, y
 
 def rotate(x, y):
     z = complex(x, y) * 1j
     return int(z.real), int(z.imag)
 
-route = [(x, y)]
+def patrol(x, y):
+    dx, dy = 0, -1
+    while True:
+        yield x, y
+        new_x = x + dx
+        new_y = y + dy
+        if not inside(new_x, new_y):
+            return
+        if (new_x, new_y) in obstacles:
+            dx, dy = rotate(dx, dy)
+            x += dx
+            y += dy
+        else:
+            x, y = new_x, new_y
 
-while True:
-    new_x = x + dx
-    new_y = y + dy
-    if not inside(new_x, new_y):
-        break
-    if (new_x, new_y) in obstacles:
-        dx, dy = rotate(dx, dy)
-        x += dx
-        y += dy
-    else:
-        x, y = new_x, new_y
-    route.append((x, y))
-
-print(len(set(route)))
+print(len(set(patrol(start_x, start_y))))
