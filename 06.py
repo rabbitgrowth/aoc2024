@@ -7,15 +7,15 @@ height = len(lines)
 def inside(x, y):
     return 0 <= x < width and 0 <= y < height
 
-empty     = []
-obstacles = []
+empty = []
+obstacles = set()
 
 for y, line in enumerate(lines):
     for x, char in enumerate(line):
         if char == '.':
             empty.append((x, y))
         elif char == '#':
-            obstacles.append((x, y))
+            obstacles.add((x, y))
         elif char == '^':
             start_x, start_y = x, y
 
