@@ -7,13 +7,13 @@ height = len(lines)
 def inside(x, y):
     return 0 <= x < width and 0 <= y < height
 
-empty = []
+spaces = []
 obstacles = set()
 
 for y, line in enumerate(lines):
     for x, char in enumerate(line):
         if char == '.':
-            empty.append((x, y))
+            spaces.append((x, y))
         elif char == '#':
             obstacles.add((x, y))
         elif char == '^':
@@ -23,10 +23,11 @@ def rotate(x, y):
     z = complex(x, y) * 1j
     return int(z.real), int(z.imag)
 
-def patrol(x, y):
+def patrol(obstacles):
+    x, y = start_x, start_y
     dx, dy = 0, -1
     while True:
-        yield x, y
+        yield x, y, dx, dy
         new_x = x + dx
         new_y = y + dy
         if not inside(new_x, new_y):
@@ -38,4 +39,14 @@ def patrol(x, y):
         else:
             x, y = new_x, new_y
 
-print(len(set(patrol(start_x, start_y))))
+print(len(set((x, y) for x, y, dx, dy in patrol(obstacles))))
+
+def causes_loop(extra_obstacle):
+    seen = set()
+    for situation in patrol(obstacles | {extra_obstacle}):
+        if situation in seen:
+            return True
+        seen.add(situation)
+    return False
+
+print(sum(map(causes_loop, spaces)))
