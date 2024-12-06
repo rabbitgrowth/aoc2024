@@ -5,10 +5,10 @@ dir←¯1 0
 Rot←⌽×¯1*|⍤⊃
 idx←⍳⍴map
 Out←~idx∊⍨⊂
-route←⍬
+route←⊂pos
 {
   try←⍵+dir
   obs∊⍨⊂try:new⊣route,←⊂new←⍵+dir⊢←Rot dir
   try⊣route,←⊂try
 }⍣{Out⍺}pos
-⎕←≢∪(⊂pos),¯1↓route
+⎕←≢∪¯1↓route
