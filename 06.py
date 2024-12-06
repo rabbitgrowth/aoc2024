@@ -4,7 +4,7 @@ with open('06.txt') as f:
 width  = len(lines[0])
 height = len(lines)
 
-def inside(x, y):
+def in_bounds(x, y):
     return 0 <= x < width and 0 <= y < height
 
 spaces = []
@@ -20,7 +20,7 @@ for y, line in enumerate(lines):
             start_x, start_y = x, y
 
 def rotate(x, y):
-    z = complex(x, y) * 1j
+    z = x * 1j - y
     return int(z.real), int(z.imag)
 
 def patrol(obstacles):
@@ -32,8 +32,8 @@ def patrol(obstacles):
             dx, dy = rotate(dx, dy)
         x += dx
         y += dy
-        if not inside(x, y):
-            return
+        if not in_bounds(x, y):
+            break
 
 print(len(set((x, y) for x, y, dx, dy in patrol(obstacles))))
 
