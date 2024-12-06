@@ -20,8 +20,7 @@ for y, line in enumerate(lines):
             start_x, start_y = x, y
 
 def rotate(x, y):
-    z = x * 1j - y
-    return int(z.real), int(z.imag)
+    return -y, x
 
 def patrol(obstacles):
     x, y = start_x, start_y
