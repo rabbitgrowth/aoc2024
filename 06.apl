@@ -9,7 +9,6 @@ move←{
   pos+←dir
   ⍵,⊂pos dir
 }
-idx←⍳⍴map
-out←~idx∊⍨⊂
+out←~(⍳⍴map)∊⍨⊂
 stop←{out⊃+/⊃⌽⍺}
 ⎕←≢∪⊃¨move⍣stop⊂pos dir
