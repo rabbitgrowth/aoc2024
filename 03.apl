@@ -1,24 +1,21 @@
-program←⊃⎕NGET'03.txt'
-
-Split←↑,⍥⊂↓
-SplitNum←{⍵Split⍨+/∧\⎕D∊⍨3↑⍵}
-Product←{
-  x rest←SplitNum ⍵
+prog←⊃⎕NGET'03.txt'
+split←↑,⍥⊂↓
+splitnum←{⍵split⍨+/∧\⎕D∊⍨3↑⍵}
+mul←{
+  x rest←splitnum ⍵
   ''≡x:0
-  sep rest←1 Split rest
-  ','≠sep:0
-  y rest←SplitNum rest
+  c rest←1 split rest
+  ','≠c:0
+  y rest←splitnum rest
   ''≡y:0
-  end rest←1 Split rest
-  ')'≠end:0
+  c rest←1 split rest
+  ')'≠c:0
   x×⍥⍎y
 }
-
-starts←'mul('(≢⍤⊣+⍸⍤⍷)program
-products←(starts-1)Product⍤↓¨⊂program
-do dont←'do()' 'don''t()'⍸⍤⍷¨⊂program
-intervals←{⍵[⍋⍵]}do,dont
-mask←(1,intervals∊do)[1+intervals⍸starts]
-
-⎕←+/products
-⎕←+/mask/products
+starts←'mul('(≢⍤⊣+⍸⍤⍷)prog
+prods←(starts-1)mul⍤↓¨⊂prog
+do dont←'do()' 'don''t()'⍸⍤⍷¨⊂prog
+switches←{⍵[⍋⍵]}do,dont
+mask←(1,switches∊do)[1+switches⍸starts]
+⎕←+/prods
+⎕←+/mask/prods

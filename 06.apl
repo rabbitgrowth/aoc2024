@@ -2,20 +2,20 @@ map←↑⊃⎕NGET'06.txt'1
 empty block pos←⍸¨'.#^'=⊂map
 pos←⊃pos
 idx←⍳⍴map
-Out←~idx∊⍨⊂
+out←~idx∊⍨⊂
 dir←¯1 0
-Rot←⊃,∘-⍨/
-Move←{
+rot←⊃,∘-⍨/
+move←{
   ⍺←⍬
   extra←block,⊂⍺
   pos dir←⊃⌽⍵
   new←pos+dir
-  extra∊⍨⊂new:⍵,⊂(pos∘+,⍥⊂⊢)Rot dir
+  extra∊⍨⊂new:⍵,⊂(pos∘+,⍥⊂⊢)rot dir
   ⍵,⊂new dir
 }
-Stop←{
+stop←{
   last←⊃⌽⍺
-  (Out⊃last)∨(⊂last)∊¯1↓⍺
+  (out⊃last)∨(⊂last)∊¯1↓⍺
 }
-⎕←≢∪¯1↓⊃¨Move⍣Stop⊂pos dir
-⎕←+/{~Out⊃⊃⌽⍵∘Move⍣Stop⊂pos dir}¨empty
+⎕←≢∪¯1↓⊃¨move⍣stop⊂pos dir
+⎕←+/{~out⊃⊃⌽⍵∘move⍣stop⊂pos dir}¨empty
