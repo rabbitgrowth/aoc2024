@@ -21,10 +21,8 @@ def fold(xs, fs):
             yield x
 
 for fs in [[add, mul], [add, mul, cat]]:
-    total = 0
-    for xs, expected in equations:
-        for result in fold(xs, fs):
-            if result == expected:
-                total += expected
-                break
-    print(total)
+    print(sum(
+        expected
+        for xs, expected in equations
+        if any(result == expected for result in fold(xs, fs))
+    ))
