@@ -13,13 +13,13 @@ def cat(x, y):
     return int(str(x) + str(y))
 
 def fold(xs, fs):
-    assert len(xs)
-    if len(xs) == 1:
-        yield xs[0]
-        return
-    x, y, *rest = xs
-    for f in fs:
-        yield from fold([f(x, y), *rest], fs)
+    match xs:
+        case [x, y, *xs]:
+            for f in fs:
+                yield from fold([f(x, y), *xs], fs)
+        case [x]:
+            yield x
+            return
 
 for fs in [[add, mul], [add, mul, cat]]:
     total = 0
