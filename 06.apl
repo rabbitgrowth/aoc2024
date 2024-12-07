@@ -10,8 +10,8 @@ move←{
   pos+←dir
   ⍵,⊂pos dir
 }
-out←~(⍳⍴map)∊⍨⊂
-stop←{((⊢/⍺)∊¯1↓⍺)∨out⊃+/⊃⌽⍺}
+atexit←{~(+/⊃⌽⍵)∊⍳⍴map}
+stop←{((⊢/⍺)∊¯1↓⍺)∨atexit⍺}
 route←∪⊃¨obs move⍣stop⊂pos dir
 ⎕←≢route
-⎕←+/{~out⊃+/⊃⌽(⍵∘≡∨obs)move⍣stop⊂pos dir}¨route
+⎕←+/{~atexit(⍵∘≡∨obs)move⍣stop⊂pos dir}¨route
