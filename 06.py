@@ -7,14 +7,11 @@ height = len(lines)
 def in_bounds(x, y):
     return 0 <= x < width and 0 <= y < height
 
-spaces = []
 obstacles = set()
 
 for y, line in enumerate(lines):
     for x, char in enumerate(line):
-        if char == '.':
-            spaces.append((x, y))
-        elif char == '#':
+        if char == '#':
             obstacles.add((x, y))
         elif char == '^':
             start_x, start_y = x, y
@@ -34,7 +31,9 @@ def patrol(obstacles):
         if not in_bounds(x, y):
             break
 
-print(len(set((x, y) for x, y, dx, dy in patrol(obstacles))))
+visited = {(x, y) for x, y, dx, dy in patrol(obstacles)}
+
+print(len(visited))
 
 def causes_loop(extra_obstacle):
     seen = set()
@@ -44,4 +43,4 @@ def causes_loop(extra_obstacle):
         seen.add(state)
     return False
 
-print(sum(map(causes_loop, spaces)))
+print(sum(map(causes_loop, visited)))
