@@ -12,6 +12,5 @@ move←{
 }
 atexit←{~(+/⊃⌽⍵)∊⍳⍴map}
 stop←{((⊢/⍺)∊¯1↓⍺)∨atexit⍺}
-route←∪⊃¨obs move⍣stop⊂pos dir
-⎕←≢route
+⎕←≢route←∪⊃¨obs move⍣stop⊂pos dir
 ⎕←+/{~atexit(⍵∘≡∨obs)move⍣stop⊂pos dir}¨route
