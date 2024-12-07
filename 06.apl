@@ -4,7 +4,7 @@ pos←⊃pos
 idx←⍳⍴map
 Out←~idx∊⍨⊂
 dir←¯1 0
-Rot←⌽×¯1*|⍤⊃
+Rot←⊃,∘-⍨/
 Move←{
   ⍺←⍬
   extra←block,⊂⍺
