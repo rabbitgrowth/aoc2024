@@ -1,3 +1,5 @@
+from operator import add, mul
+
 equations = []
 
 with open('07.txt') as f:
@@ -6,12 +8,6 @@ with open('07.txt') as f:
         expected = int(left)
         xs = list(map(int, right.split()))
         equations.append((xs, expected))
-
-def add(x, y):
-    return x + y
-
-def mul(x, y):
-    return x * y
 
 def cat(x, y):
     return int(str(x) + str(y))
