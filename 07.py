@@ -19,7 +19,6 @@ def fold(xs, fs):
                 yield from fold([f(x, y), *xs], fs)
         case [x]:
             yield x
-            return
 
 for fs in [[add, mul], [add, mul, cat]]:
     total = 0
