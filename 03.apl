@@ -15,7 +15,7 @@ mul←{
 starts←'mul('(≢⍤⊣+⍸⍤⍷)prog
 prods←(starts-1)mul⍤↓¨⊂prog
 do dont←'do()' 'don''t()'⍸⍤⍷¨⊂prog
-switches←{⍵[⍋⍵]}do,dont
+switches←(⊂⍤⍋⌷⊢)do,dont
 mask←(1,switches∊do)[1+switches⍸starts]
 ⎕←+/prods
 ⎕←+/mask/prods
