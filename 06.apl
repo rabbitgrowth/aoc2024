@@ -1,14 +1,17 @@
 map←↑⊃⎕NGET'06.txt'1
+obs←'#'=⌷∘map
 pos←⊃⍸'^'=map
 dir←¯1 0
 rot←⊃,∘-⍨/
 move←{
   pos dir←⊃⌽⍵
-  rots←+/∧\'#'=⌷∘map¨(⊂pos)+(⊢,⍥⊂rot)dir
+  rots←+/∧\⍺⍺¨(⊂pos)+(⊢,⍥⊂rot)dir
   dir←rot⍣rots⊢dir
   pos+←dir
   ⍵,⊂pos dir
 }
 out←~(⍳⍴map)∊⍨⊂
-stop←{out⊃+/⊃⌽⍺}
-⎕←≢∪⊃¨move⍣stop⊂pos dir
+stop←{((⊢/⍺)∊¯1↓⍺)∨out⊃+/⊃⌽⍺}
+route←∪⊃¨obs move⍣stop⊂pos dir
+⎕←≢route
+⎕←+/{~out⊃+/⊃⌽(⍵∘≡∨obs)move⍣stop⊂pos dir}¨route
