@@ -6,10 +6,11 @@ dirs←4 2⍴¯1 0 0 1 1 0 0 ¯1
 dir←0
 turn←4|1∘+
 route←↑4↑⊂guard
+state←pos dir route
 out←~(⍳⍴map)∊⍨⊂
 move←{
   pos dir route←⍵
-  turns←+/∧\(blocked⌷⍨pos+⌷∘dirs)¨(⊢,turn)dir
+  turns←+/∧\(⍺⌷⍨pos+⌷∘dirs)¨(⊢,turn)dir
   dir←turn⍣turns⊢dir
   pos+←dir⌷dirs
   ((dir,pos)⌷route)+←1
@@ -17,7 +18,8 @@ move←{
 }
 stop←{
   pos dir route←⍺
-  out pos+dir⌷dirs
+  (2∊route)∨out pos+dir⌷dirs
 }
-visited←×+⌿⊃⌽move⍣stop⊢pos dir route
+visited←×+⌿⊃⌽blocked∘move⍣stop⊢state
 ⎕←+/,visited
+⎕←+/{2∊⊃⌽(1@(⊂⍵)⊢blocked)∘move⍣stop⊢state}¨⍸visited
