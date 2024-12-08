@@ -4,4 +4,4 @@ pairs←⊂⌷⍨∘⊂¨∘⍸∘.<⍨⍤⍳⍤≢
 emit←{f←⊂⍤⊣+⍺⍺×⊂⍤- ⋄ ⍺(f,f⍨)⍵}
 solve←{≢(,⍳⍴map)∩⊃,/⊃,/((⊃⍵emit/)¨pairs)¨antennas}
 ⎕←solve ,1
-⎕←solve 0,⍳≢map
+⎕←solve 0,⍳⌈/⍴map
