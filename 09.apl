@@ -5,14 +5,12 @@ files←∊(⊢⍴¨¯1,⍨⍪⍤⍳⍤≢)(,∘0⍴⍨2,⍨∘⌈2÷⍨≢)map
 space←¯1=files
 cksum←⍳⍤≢+.×⊢
 ⎕←cksum(+/~space)↑((+/space)↑⌽files/⍨~space)@(space⍨)files
-{
-  idx←⍸⍵=files
+⎕←cksum 0⌈⊃{
+  idx←⍸⍺=⍵
   size←≢idx
-  space←¯1=files↑⍨⊃idx
+  space←¯1=⍵↑⍨⊃idx
   starts spans←↓⍉-⍨\(⊢⍴⍨2,⍨2÷⍨≢)(⍸2≠/0,,∘0)space
   fit←spans≥size
-  ~∨/fit:0
-  files[idx]←¯1
-  files[starts[⊃⍸fit]+⍳size]←⍵
-}¨⌽⍳1+⊃⌽files
-⎕←cksum 0⌈files
+  ~∨/fit:⍵
+  ⍺@(starts[⊃⍸fit]+⍳size)⊢¯1@idx⊢⍵
+}/(⍳1+⊃⌽files),⊂files
