@@ -2,9 +2,8 @@
 ⎕PP←34
 map←⍎¨⊃⊃⎕NGET'09.txt'1
 files←∊(⊢⍴¨¯1,⍨⍪⍤⍳⍤≢)(,∘0⍴⍨2,⍨∘⌈2÷⍨≢)map
-space←¯1=files
 cksum←⍳⍤≢+.×⊢
-⎕←cksum(+/~space)↑((+/space)↑⌽files/⍨~space)@(space⍨)files
+⎕←cksum{(0+.≤⍵)↑((¯1+.=⍵)↑⌽⍵~¯1)@(¯1∘=)⍵}files
 ⎕←cksum 0⌈⊃{
   idx←⍸⍺=⍵
   size←≢idx
