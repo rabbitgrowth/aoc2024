@@ -7,8 +7,7 @@ cksum←⍳⍤≢+.×⊢
 ⎕←cksum 0⌈⊃{
   idx←⍸⍺=⍵
   size←≢idx
-  space←¯1=⍵↑⍨⊃idx
-  starts spans←↓⍉-⍨\(⊢⍴⍨2,⍨2÷⍨≢)(⍸2≠/0,,∘0)space
+  starts spans←↓⍉-⍨\(⊢⍴⍨2,⍨2÷⍨≢)(⍸2≠/0,,∘0)¯1=⍵↑⍨⊃idx
   fit←spans≥size
   ~∨/fit:⍵
   ⍺@(starts[⊃⍸fit]+⍳size)⊢¯1@idx⊢⍵
