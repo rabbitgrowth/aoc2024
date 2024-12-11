@@ -1,22 +1,22 @@
+from collections import Counter
+
 with open('11.txt') as f:
-    xs = list(map(int, f.read().split()))
+    xs = Counter(map(int, f.read().split()))
 
-for _ in range(25):
-    new_xs = []
-    for x in xs:
-        if x == 0:
-            new_xs.append(1)
-        else:
-            digits = str(x)
-            length = len(digits)
-            if length % 2 == 0:
-                half = length // 2
-                new_xs.extend([
-                    int(digits[:half]),
-                    int(digits[half:]),
-                ])
+for times in [25, 50]:
+    for _ in range(times):
+        ys = Counter()
+        for x, n in xs.items():
+            if x == 0:
+                ys[1] += n
             else:
-                new_xs.append(x * 2024)
-    xs = new_xs
-
-print(len(xs))
+                digits = str(x)
+                length = len(digits)
+                if length % 2 == 0:
+                    half = length // 2
+                    ys[int(digits[:half])] += n
+                    ys[int(digits[half:])] += n
+                else:
+                    ys[x * 2024] += n
+        xs = ys
+    print(sum(xs.values()))
