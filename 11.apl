@@ -1,5 +1,5 @@
 ⎕PP←34
-stones←1,⍨⍪⍎⊃⊃⎕NGET'11.txt'1
+stones←,∘≢⌸⍎⊃⊃⎕NGET'11.txt'1
 change←{
   0=⍵:1
   digits←⌊1+10⍟⍵
