@@ -2,8 +2,8 @@
 stones←⍎⊃⊃⎕NGET'11.txt'1
 blink←∊{
   0=⍵:1
-  n←≢d←⍕⍵
-  1=2|n:2024×⍵
-  ⍎¨d(↑,⍥⊂↓)⍨n÷2
+  digits←⌊1+10⍟⍵
+  1=2|digits:2024×⍵
+  ⍵⊤⍨0,10*digits÷2
 }¨
 ⎕←≢blink⍣25⊢stones
