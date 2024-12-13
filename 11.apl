@@ -1,5 +1,5 @@
 ⎕PP←34
-tally←1,⍨⍪⍎⊃⊃⎕NGET'11.txt'1
+stones←1,⍨⍪⍎⊃⊃⎕NGET'11.txt'1
 change←{
   0=⍵:1
   digits←⌊1+10⍟⍵
@@ -7,13 +7,13 @@ change←{
   ⍵⊤⍨0,10*digits÷2
 }
 blink←{
-  stones count←↓⍉⍵
-  stones←change¨stones
-  count/⍨←≢¨stones
-  stones←⊃,/stones
-  stones,∘(+/)⌸count
+  nums counts←↓⍉⍵
+  nums←change¨nums
+  counts/⍨←≢¨nums
+  nums←⊃,/nums
+  nums,∘(+/)⌸counts
 }
-tally←blink⍣25⊢tally
-⎕←+/⊢/tally
-tally←blink⍣50⊢tally
-⎕←+/⊢/tally
+stones←blink⍣25⊢stones
+⎕←+/⊢/stones
+stones←blink⍣50⊢stones
+⎕←+/⊢/stones
