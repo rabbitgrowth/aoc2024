@@ -1,0 +1,9 @@
+⎕PP←34
+stones←⍎⊃⊃⎕NGET'11.txt'1
+blink←∊{
+  0=⍵:1
+  n←≢d←⍕⍵
+  1=2|n:2024×⍵
+  ⍎¨d(↑,⍥⊂↓)⍨n÷2
+}¨
+⎕←≢blink⍣25⊢stones
