@@ -10,7 +10,7 @@ blink←{
   nums counts←↓⍉⍵
   nums←change¨nums
   counts+←0×nums
-  nums,∘(+/)⌸⍥∊counts
+  nums{⍺,+/⍵}⌸⍥∊counts
 }
 stones←blink⍣25⊢stones
 ⎕←+/⊢/stones
