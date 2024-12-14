@@ -1,6 +1,6 @@
 ⎕IO←0
-robots←(⍎¨∊∘('-',⎕D)⊆⊢)¨⊃⎕NGET'14.txt'1
+pos vel←↓⍉↑{2(↑,⍥⊂↓)⍎¨⍵⊆⍨⍵∊⎕D,'-'}¨⊃⎕NGET'14.txt'1
 size←101 103
-middle←⌊size÷2
-pos←{x y dx dy←⍵ ⋄ size|x y+100×dx dy}¨robots
-⎕←×/≢⍤⊢⌸(⊂middle)<pos/⍨~∨/¨pos=⊂middle
+mid←⌊size÷2
+pos←(⊂size)|pos+100×vel
+⎕←×/≢⍤⊢⌸(⊂mid)<pos/⍨~∨/¨pos=⊂mid
