@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -22,20 +24,13 @@ class Point:
 with open('15.txt') as f:
     top, bot = f.read().split('\n\n')
 
-wall   = set()
-boxes  = set()
-robots = set()
-
-chars = {
-    '#': wall,
-    'O': boxes,
-    '@': robots,
-}
+points = defaultdict(set)
 
 for y, line in enumerate(top.splitlines()):
     for x, char in enumerate(line):
-        if char in chars:
-            chars[char].add(Point(x, y))
+        points[char].add(Point(x, y))
+
+wall, boxes, robots = map(points.get, '#O@')
 
 [robot] = robots
 
