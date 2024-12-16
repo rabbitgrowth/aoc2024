@@ -22,17 +22,22 @@ class Point:
 with open('15.txt') as f:
     top, bot = f.read().split('\n\n')
 
-wall  = set()
-boxes = set()
+wall   = set()
+boxes  = set()
+robots = set()
+
+chars = {
+    '#': wall,
+    'O': boxes,
+    '@': robots,
+}
 
 for y, line in enumerate(top.splitlines()):
     for x, char in enumerate(line):
-        if char == '#':
-            wall.add(Point(x, y))
-        elif char == 'O':
-            boxes.add(Point(x, y))
-        elif char == '@':
-            robot = Point(x, y)
+        if char in chars:
+            chars[char].add(Point(x, y))
+
+[robot] = robots
 
 directions = {
     '<': Point(-1,  0),
