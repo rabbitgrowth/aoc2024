@@ -11,6 +11,5 @@ dirs←(0 ¯1)(0 1)(¯1 0)(1 0)['<>^v'⍳∊bot]
   nboxes←+/∧\ahead∊boxes
   burden ahead←nboxes(↑,⍥⊂↓)ahead
   wall∊⍨⊂⊃ahead:boxes robot
-  pushed←burden+⊂⍺
-  (pushed∪boxes~burden)(robot+⍺)
+  ((boxes~burden)∪burden+⊂⍺)(robot+⍺)
 }/(⌽dirs),⊂boxes robot
